@@ -2,35 +2,71 @@
 
 #include "common.h"
 #include "formula.h"
+#include <algorithm>
 
-#include <functional>
-#include <unordered_set>
+class Impl {
+public:
+    virtual CellInterface::Value GetValue(const SheetInterface&) const = 0;
+    virtual std::string GetText() const = 0;
+    virtual std::vector<Position> GetReferencedCells() const {
+        return {};
+    };
+};
 
-class Sheet;
+class EmptyImpl : public Impl {
+public:
+    CellInterface::Value GetValue(const SheetInterface&) const override;
+    std::string GetText() const override;
+};
+
+class TextImpl : public Impl {
+public:
+    explicit TextImpl(std::string expr);
+    CellInterface::Value GetValue(const SheetInterface&) const override;
+    std::string GetText() const override;
+private:
+    std::string value_;
+};
+
+class FormulaImpl : public Impl {
+public:
+    explicit FormulaImpl(std::string expr);
+    CellInterface::Value GetValue(const SheetInterface& sheet) const override;
+    std::string GetText() const override;
+    std::vector<Position> GetReferencedCells() const override;
+private:
+    std::unique_ptr<FormulaInterface> value_;
+};
+
+
+//��� ��� �������� ���������� ���������� ������
+struct CellCache {
+    double value = 0.0;
+    bool valid = false;
+};
 
 class Cell : public CellInterface {
 public:
-    Cell(Sheet& sheet);
+    Cell() = default;
+    explicit Cell(SheetInterface& sheet);
     ~Cell();
 
-    void Set(std::string text);
+    void Set(std::string text) override;
     void Clear();
+    void ClearCache() override;
 
-    Value GetValue() const override;
+    void SetCache(double value);
+    bool HasCache();
+    double GetCache();
+
+    Value GetValue() override;
     std::string GetText() const override;
-    std::vector<Position> GetReferencedCells() const override;
 
+    std::vector<Position> GetReferencedCells() const override;
     bool IsReferenced() const;
 
-private:
-    class Impl;
-    class EmptyImpl;
-    class TextImpl;
-    class FormulaImpl;
-
+private:    
     std::unique_ptr<Impl> impl_;
-
-    // Добавьте поля и методы для связи с таблицей, проверки циклических 
-    // зависимостей, графа зависимостей и т. д.
-
+    SheetInterface& sheet_;
+    CellCache cache_;
 };
