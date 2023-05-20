@@ -351,10 +351,10 @@ void TestValidFormula() {
     auto sheet = CreateSheet();
     sheet->SetCell("A1"_pos, "=1");
     auto res1 = sheet->GetCell("A1"_pos)->GetValue();
-    ASSERT_EQUAL(sheet->GetCell("A1"_pos)->GetValue(), CellInterface::Value(1));
+    ASSERT_EQUAL(sheet->GetCell("A1"_pos)->GetValue(), CellInterface::Value(1.0));
     sheet->SetCell("A1"_pos, "=1+2");
     auto res = sheet->GetCell("A1"_pos)->GetValue();
-    ASSERT_EQUAL(sheet->GetCell("A1"_pos)->GetValue(), CellInterface::Value(3));
+    ASSERT_EQUAL(sheet->GetCell("A1"_pos)->GetValue(), CellInterface::Value(3.0));
     sheet->SetCell("B2"_pos, "=1/2");
     sheet->SetCell("A3"_pos, "=(1+1)/-1");
     sheet->SetCell("C3"_pos, "=(1+1)/(+1)");
