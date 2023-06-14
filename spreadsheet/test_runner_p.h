@@ -85,27 +85,36 @@ public:
     void RunTest(TestFunc func, const std::string& test_name) {
         try {
             func();
-            std::cerr << test_name << " OK" << std::endl;
+            //td::cerr << test_name << " OK" << std::endl;
+            result += ("<div style=\"margin-bottom:10px\">" + test_name + " <span style=\"color:green\">OK</span></div>");
         }
         catch (std::exception& e) {
             ++fail_count;
-            std::cerr << test_name << " fail: " << e.what() << std::endl;
+            //std::cerr << test_name << " fail: " << e.what() << std::endl;
+            result += ("<div style=\"margin-bottom:10px\">" + test_name + " <span style=\"color:red\">" + e.what() + "</span></div>");
         }
         catch (...) {
             ++fail_count;
-            std::cerr << "Unknown exception caught" << std::endl;
+            //std::cerr << "Unknown exception caught" << std::endl;
+            result += "Unknown exception caught\n";
         }
+    }
+
+    const std::string GetResult(){
+        return result;
     }
 
     ~TestRunner() {
         std::cerr.flush();
         if (fail_count > 0) {
-            std::cerr << fail_count << " unit tests failed. Terminate" << std::endl;
+            //std::cerr << fail_count << " unit tests failed. Terminate" << std::endl;
+            //result += ("<div style=\"margin-bottom:10px\">" + fail_count + " unit tests failed. Terminate</span></div>");
             exit(1);
         }
     }
 
 private:
+    std::string result;
     int fail_count = 0;
 };
 

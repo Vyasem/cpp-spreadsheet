@@ -3,6 +3,7 @@
 #include <cctype>
 #include <string_view>
 #include <sstream>
+#include <string>
 #include <algorithm>
 
 using namespace std::literals;
@@ -62,7 +63,7 @@ Position Position::FromString(std::string_view str) {
     }
 
     int row;
-    std::istringstream row_in{ std::string{digits} };
+    std::istringstream row_in{ std::string(digits) };
     if (!(row_in >> row) || !row_in.eof()) {
         return Position::NONE;
     }

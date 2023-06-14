@@ -52,12 +52,10 @@ public:
     void PrintValues(std::ostream& output) const override;
     void PrintTexts(std::ostream& output) const override;
 
-    //Добавление в граф зависимостей, полученых в резульате парсинга формулы из Cell::Set
     void CreateDependencies(Position from, const std::vector<Position>& dependencies) override;
 
-    //Запуск поиска циклических зависимосте из метода Cell::Set и Cell::Clear
     void FindCyclicDependencies(Position pos) override;
-    //Запуск инвалидации кеша из метода Cell::Set и Cell::Clear
+
     void InvalidateCache(Position pos) override;
 
 

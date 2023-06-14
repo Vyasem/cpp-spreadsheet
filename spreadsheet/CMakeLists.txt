@@ -44,7 +44,9 @@ add_executable(
     ${sources}
 )
 
-target_link_libraries(spreadsheet antlr4_static)
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+
+target_link_libraries(spreadsheet PUBLIC antlr4_static PRIVATE Qt5::Widgets)
 if(MSVC)
     target_compile_options(antlr4_static PRIVATE /W0)
 endif()

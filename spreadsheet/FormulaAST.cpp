@@ -145,8 +145,8 @@ namespace ASTImpl {
                 }
             }
 
-            // Реализуйте метод Evaluate() для бинарных операций.
-            // При делении на 0 выбрасывайте ошибку вычисления FormulaError
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ Evaluate() пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+            // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ 0 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ FormulaError
             double Evaluate(const SheetInterface& sheet) const override {
                 double lhsResult = lhs_->Evaluate(sheet);
                 double rhsResult = rhs_->Evaluate(sheet);
@@ -213,7 +213,6 @@ namespace ASTImpl {
                 return EP_UNARY;
             }
 
-            // Реализуйте метод Evaluate() для унарных операций.
             double Evaluate(const SheetInterface& sheet) const override {
                 if (operand_.get()) {
                     if (type_ == UnaryMinus) {
@@ -229,7 +228,7 @@ namespace ASTImpl {
             std::unique_ptr<Expr> operand_;
         };
 
-        class CellExpr final : public Expr {
+        class CellExpr final : public Expr {            // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
         public:
             explicit CellExpr(const Position* cell)
                 : cell_(cell) {
@@ -304,7 +303,6 @@ namespace ASTImpl {
                 return EP_ATOM;
             }
 
-            // Для чисел метод возвращает значение числа.
             double Evaluate(const SheetInterface&) const override {
                 return value_;
             }

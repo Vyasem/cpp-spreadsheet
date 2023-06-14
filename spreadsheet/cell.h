@@ -6,6 +6,7 @@
 
 class Impl {
 public:
+	virtual ~Impl() = default;
     virtual CellInterface::Value GetValue(const SheetInterface&) const = 0;
     virtual std::string GetText() const = 0;
     virtual std::vector<Position> GetReferencedCells() const {
@@ -39,7 +40,6 @@ private:
 };
 
 
-//Кэш для хранения результата вычесления формул
 struct CellCache {
     double value = 0.0;
     bool valid = false;

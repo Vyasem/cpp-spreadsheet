@@ -4,6 +4,11 @@
 #include "formula.h"
 #include "test_runner_p.h"
 
+#include <QApplication>
+#include <QWidget>
+#include <QLabel>
+#include <QString>
+
 inline std::ostream& operator<<(std::ostream& output, Position pos) {
     return output << "(" << pos.row << ", " << pos.col << ")";
 }
@@ -362,7 +367,7 @@ void TestValidFormula() {
 
 }  // namespace
 
-int main() {
+int main(int argc, char* argv[]) {
     TestRunner tr;
     RUN_TEST(tr, TestPositionAndStringConversion);
     RUN_TEST(tr, TestPositionToStringInvalid);
@@ -384,11 +389,16 @@ int main() {
     RUN_TEST(tr, TestFormulaIncorrect);
     RUN_TEST(tr, TestCellCircularReferences);
     RUN_TEST(tr, TestValidFormula);
-    auto sheet = CreateSheet();
+    /*auto sheet = CreateSheet();
     sheet->SetCell("A1"_pos, "=1");
     std::cout << sheet->GetCell("A1"_pos)->GetText() << std::endl;
     std::ostringstream aos;
     aos << sheet->GetCell("A1"_pos)->GetValue();
     std::cout << aos.str();
-    return 0;
-}
+    return 0;*/
+    QApplication app(argc, argv);
+    QLabel* opa = new QLabel(QString::fromStdString(tr.GetResult()));
+    opa->setMargin(5);
+    opa->show();
+    return app.exec();
+ }
