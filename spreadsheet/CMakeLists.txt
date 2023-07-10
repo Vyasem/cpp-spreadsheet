@@ -34,6 +34,8 @@ include_directories(
 )
 
 file(GLOB sources
+    gui/*.cpp
+    gui/*.h
     *.cpp
     *.h
 )
