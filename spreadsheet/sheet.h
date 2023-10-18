@@ -58,7 +58,6 @@ public:
 
     void InvalidateCache(Position pos) override;
 
-
 private:
     const CellInterface* GetCellPtr(Position pos) const;
 private:

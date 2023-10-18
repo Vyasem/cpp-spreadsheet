@@ -1,14 +1,13 @@
 #include <limits>
 #include <sstream>
+#include <iostream>
 #include "common.h"
+#include "sheet.h"
 #include "formula.h"
 #include "test_runner_p.h"
 #include "unit_test.h"
 
-#include <QApplication>
-#include <QWidget>
-#include <QLabel>
-#include <QString>
+#include <QtWidgets>
 
 inline std::ostream& operator<<(std::ostream& output, Position pos) {
     return output << "(" << pos.row << ", " << pos.col << ")";
@@ -31,9 +30,9 @@ inline std::ostream& operator<<(std::ostream& output, const CellInterface::Value
     return output;
 }
 
-UnitTest::UnitTest(int argc, char** argv):t_argc(argc), t_argv(argv){};
+UnitTest::UnitTest() = default;
 
-int UnitTest::run(){
+void UnitTest::run(){
     TestRunner tr;
     RUN_TEST(tr, TestPositionAndStringConversion);
     RUN_TEST(tr, TestPositionToStringInvalid);
@@ -55,12 +54,11 @@ int UnitTest::run(){
     RUN_TEST(tr, TestFormulaIncorrect);
     RUN_TEST(tr, TestCellCircularReferences);
     RUN_TEST(tr, TestValidFormula);
-    QApplication app(t_argc, t_argv);
+
     QLabel* opa = new QLabel(QString::fromStdString(tr.GetResult()));
     opa->setMargin(5);
     opa->setWindowTitle("Результаты UNIT тестов");
     opa->show();
-    return app.exec();
 }
 
 void UnitTest::TestPositionAndStringConversion() {

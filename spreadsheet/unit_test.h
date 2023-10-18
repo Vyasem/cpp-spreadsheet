@@ -1,13 +1,9 @@
 #pragma once
 
-#include <iostream>
-#include "common.h"
-#include "formula.h"
-
 class UnitTest{
 public:
-    UnitTest(int argc, char** argv);
-    int run();
+    UnitTest();
+    void run();
 private:
     static void TestPositionAndStringConversion();
     static void TestPositionToStringInvalid();
@@ -29,7 +25,4 @@ private:
     static void TestFormulaIncorrect();
     static  void TestCellCircularReferences();
     static void TestValidFormula();
-private:
-int t_argc;
-char** t_argv;
 };

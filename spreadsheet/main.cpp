@@ -1,11 +1,14 @@
-#include "gui/gui.h"
 #include "unit_test.h"
+#include "gui/gui.h"
 
 int test(int argc, char** argv){
-    UnitTest testObj(argc, argv);
-    return testObj.run();
+    QApplication app(argc, argv);
+    UnitTest testObj;
+    testObj.run();
+    return app.exec();
 }
 
 int main(int argc, char** argv) {
-    return test(argc, argv);
+    Gui gui(argc, argv);
+    return gui.run();
  }

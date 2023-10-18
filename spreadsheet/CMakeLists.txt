@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.8 FATAL_ERROR)
 project(spreadsheet)
 
+set(CMAKE_AUTOMOC ON)
+
 set(CMAKE_CXX_STANDARD 17)
 if(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
     set(
@@ -33,6 +35,8 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}/antlr4_runtime/runtime/src
 )
 
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+
 file(GLOB sources
     gui/*.cpp
     gui/*.h
@@ -45,8 +49,6 @@ add_executable(
     ${ANTLR_FormulaParser_CXX_OUTPUTS}
     ${sources}
 )
-
-find_package(Qt5 COMPONENTS Widgets REQUIRED)
 
 target_link_libraries(spreadsheet PUBLIC antlr4_static PRIVATE Qt5::Widgets)
 if(MSVC)
