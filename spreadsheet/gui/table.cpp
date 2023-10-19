@@ -15,11 +15,22 @@ Table::~Table(){
 
 void Table::run(){
     fillTable();
-    table_->move(0, 20);
-    table_->resize(parent_->width(), parent_->height() - 20);
     table_->show();   
     QObject::connect(table_, SIGNAL(itemChanged(QTableWidgetItem *)), this, SLOT(cellChange(QTableWidgetItem *)));
     QObject::connect(table_, SIGNAL(itemDoubleClicked(QTableWidgetItem *)), this, SLOT(cellDoubleClick(QTableWidgetItem *)));
+}
+
+void Table::posResize(int width, int height, int x, int y){
+    if(width == 0){
+        width = parent_->width();
+    }
+
+    if(height == 0){
+        height = parent_->height();
+    }
+
+    table_->move(x, y);
+    table_->resize(width, height);
 }
 
 void Table::cellChange(QTableWidgetItem * item){

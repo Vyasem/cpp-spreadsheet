@@ -11,6 +11,14 @@ void Menu::run(){
     menu_->show();
 }
 
+int Menu::getWidth(){
+    return menu_->width();
+}
+
+int Menu::getHeight(){
+    return menu_->height();
+}
+
 void Menu::fileOpen(){}
 
 void Menu::fileSave(){}

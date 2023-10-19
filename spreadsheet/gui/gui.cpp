@@ -26,4 +26,6 @@ void Gui::menuShow(){
 void Gui::tableShow(){
     tbl_ = new Table(rows_, cols_, parent_);
     tbl_->run();
+    int menuHeight = mn_->getHeight();
+    tbl_->posResize(parent_->width(), parent_->height() - menuHeight, 0, menuHeight);
 }

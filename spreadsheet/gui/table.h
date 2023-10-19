@@ -10,6 +10,7 @@ public:
     Table(int rows, int cols, QWidget * parent = nullptr);
     ~Table();
     void run();
+    void posResize(int width = 0, int height = 0, int x = 0, int y = 0);
 public slots:
     void cellChange(QTableWidgetItem * item);
     void cellDoubleClick(QTableWidgetItem * item);

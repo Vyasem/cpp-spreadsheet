@@ -8,6 +8,8 @@ public:
     Menu(QWidget * parent = nullptr);
     ~Menu();
     void run();
+    int getWidth();
+    int getHeight();
 public slots:
     void fileOpen();
     void fileSave();
