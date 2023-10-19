@@ -1,7 +1,6 @@
 #pragma once
 #include <memory>
 #include "../sheet.h"
-//#include "../formula.h"
 #include <QObject>
 #include <QtWidgets>
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "table.h"
+#include "menu.h"
 #include <QtWidgets>
 
 class Gui{
@@ -14,6 +15,7 @@ private:
     QApplication * app_;
     QMainWindow * parent_;
     Table * tbl_ = nullptr;
+    Menu * mn_ = nullptr;
     int width_ = 1300;
     int height_ = 760;
     int rows_ = 1000;

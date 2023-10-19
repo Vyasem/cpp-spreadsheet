@@ -3,7 +3,6 @@
 #include <variant>
 #include "../common.h"
 #include "../sheet.h"
-//#include "../formula.h"
 #include <QtWidgets>
 #include <string>
 
@@ -16,10 +15,11 @@ Table::~Table(){
 
 void Table::run(){
     fillTable();
-    table_->resize(parent_->size());
+    table_->move(0, 20);
+    table_->resize(parent_->width(), parent_->height() - 20);
     table_->show();   
     QObject::connect(table_, SIGNAL(itemChanged(QTableWidgetItem *)), this, SLOT(cellChange(QTableWidgetItem *)));
-    //QObject::connect(table_, SIGNAL(itemDoubleClicked(QTableWidgetItem *)), this, SLOT(cellDoubleClick(QTableWidgetItem *)));
+    QObject::connect(table_, SIGNAL(itemDoubleClicked(QTableWidgetItem *)), this, SLOT(cellDoubleClick(QTableWidgetItem *)));
 }
 
 void Table::cellChange(QTableWidgetItem * item){
