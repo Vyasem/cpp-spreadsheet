@@ -2,17 +2,13 @@
 #include <QtWidgets>
 #include <QObject>
 
-class Menu : public QObject{
-    Q_OBJECT
+class Menu{
 public:
-    Menu(QWidget * parent = nullptr);
+    Menu(QWidget * parent = nullptr, QObject * reciver = nullptr);
     ~Menu();
     void run();
     int getWidth();
     int getHeight();
-public slots:
-    void fileOpen();
-    void fileSave();
 private:
     void createMenu();
     void createFileMenu();
@@ -20,4 +16,5 @@ private:
 private:
     QMenuBar * menu_;
     QWidget * parent_;
+    QObject * reciver_;
 };

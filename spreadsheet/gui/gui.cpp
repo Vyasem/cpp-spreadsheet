@@ -2,6 +2,7 @@
 #include "table.h"
 #include "menu.h"
 #include <QtWidgets>
+#include <QDialog>
 
 Gui::Gui(int &argc, char** argv):app_(new QApplication(argc, argv)), parent_(new QMainWindow){};
 
@@ -18,8 +19,32 @@ int Gui::run(){
     return app_->exec();
 }
 
+void Gui::fileOpen(){
+    QFileDialog* pdlg = new QFileDialog;
+    pdlg->setWindowTitle("Открыть файл");
+    if (pdlg->exec() == QDialog::Accepted){
+
+    }
+    delete pdlg;
+}
+
+void Gui::fileSave(){
+    QFileDialog* pdlg = new QFileDialog;
+    pdlg->setWindowTitle("Сохранить файл как");
+    pdlg->setAcceptMode(QFileDialog::AcceptSave);
+    if (pdlg->exec() == QDialog::Accepted){
+
+    }
+    delete pdlg;
+}
+
+
+void Gui::appQuit(){
+    app_->quit();
+}
+
 void Gui::menuShow(){
-    mn_ = new Menu(parent_);
+    mn_ = new Menu(parent_, this);
     mn_->run();
 }
 

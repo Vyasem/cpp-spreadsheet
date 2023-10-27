@@ -1,8 +1,8 @@
 #include "menu.h"
+#include <fstream>
 #include <QtWidgets>
 
-
-Menu::Menu(QWidget * parent): menu_(new QMenuBar(parent)), parent_(parent){}
+Menu::Menu(QWidget * parent, QObject * reciver): menu_(new QMenuBar(parent)), parent_(parent), reciver_(reciver){}
 Menu::~Menu() = default;
 
 void Menu::run(){
@@ -19,21 +19,16 @@ int Menu::getHeight(){
     return menu_->height();
 }
 
-void Menu::fileOpen(){}
-
-void Menu::fileSave(){}
-
-
 void Menu::createMenu(){
     createFileMenu();
 }
 
 void Menu::createFileMenu(){
     QMenu * mn = new QMenu("Файл");
-    mn->addAction("Открыть");
-    mn->addAction("Сохранить");
+    mn->addAction("Открыть", reciver_, SLOT(fileOpen()));
+    mn->addAction("Сохранить", reciver_, SLOT(fileSave()));
     mn->addSeparator();
-    mn->addAction("Выйти");
+    mn->addAction("Выйти", reciver_, SLOT(appQuit()));
     menu_->addMenu(mn);
 }
 

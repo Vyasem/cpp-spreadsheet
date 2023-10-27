@@ -15,7 +15,7 @@ public slots:
     void cellChange(QTableWidgetItem * item);
     void cellDoubleClick(QTableWidgetItem * item);
 private:
-    void fillTable();
+    void fillEmptyTable();
 private:
     QTableWidget * table_;
     std::unique_ptr<SheetInterface> sheet_;

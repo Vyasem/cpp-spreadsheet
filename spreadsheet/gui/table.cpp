@@ -14,7 +14,7 @@ Table::~Table(){
 }
 
 void Table::run(){
-    fillTable();
+    fillEmptyTable();
     table_->show();   
     QObject::connect(table_, SIGNAL(itemChanged(QTableWidgetItem *)), this, SLOT(cellChange(QTableWidgetItem *)));
     QObject::connect(table_, SIGNAL(itemDoubleClicked(QTableWidgetItem *)), this, SLOT(cellDoubleClick(QTableWidgetItem *)));
@@ -63,7 +63,7 @@ void Table::cellDoubleClick(QTableWidgetItem * item){
     }
 }
 
-void Table::fillTable(){
+void Table::fillEmptyTable(){
     QStringList lstH;
     QStringList lstV;
 

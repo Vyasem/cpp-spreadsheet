@@ -2,12 +2,18 @@
 #include "table.h"
 #include "menu.h"
 #include <QtWidgets>
+#include <QObject>
 
-class Gui{
+class Gui : public QObject{
+    Q_OBJECT
 public:
     Gui(int &argc, char** argv);
     ~Gui();
     int run();
+public slots:
+    void fileOpen();
+    void fileSave();
+    void appQuit();
 private:
     void menuShow();
     void tableShow();
